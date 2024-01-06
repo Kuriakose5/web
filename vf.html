@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #registrationForm {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        label.required:after {
+            content: " *";
+            color: red;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="registrationForm">
+        <h2>Registration Form</h2>
+        <div id="error-message"></div>
+        <form onsubmit="return validateForm()">
+            <label for="first_name" class="required">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+
+            <label for="last_name" class="required">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required>
+
+            <label for="email" class="required">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone" class="required">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="date_of_birth" class="required">Date of Birth:</label>
+            <input type="date" id="date_of_birth" name="date_of_birth" required>
+
+            <label for="gender" class="required">Gender:</label>
+            <input type="radio" id="male" name="gender" value="Male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female" required>
+            <label for="female">Female</label>
+            <input type="radio" id="other" name="gender" value="Other" required>
+            <label for="other">Other</label>
+
+            <label for="course" class="required">Select Course:</label>
+            <select id="course" name="course" required>
+                <option value="B.tech">B.tech</option>
+                <option value="Cyber Security">Cyber Security</option>
+                <option value="MCA">MCA</option>
+            </select>
+
+            <label for="admission_type" class="required">Admission Type:</label>
+            <input type="radio" id="regular" name="admission_type" value="Regular" required>
+            <label for="regular">Regular</label>
+            <input type="radio" id="distance" name="admission_type" value="Distance" required>
+            <label for="distance">Distance</label>
+
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">I agree to the terms and conditions</label>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var errorMessage = "";
+
+            // Check if the fields are not empty
+            var fields = ["first_name", "last_name", "email", "phone", "date_of_birth", "gender", "course", "admission_type"];
+            for (var i = 0; i < fields.length; i++) {
+                var field = fields[i];
+                var value = document.getElementById(field).value.trim();
+                if (value === "") {
+                    errorMessage += "Please enter your " + field.replace("_", " ") + ". ";
+                }
+            }
+
+            // Check if the email is in a valid format
+            var emailFormat = /^\S+@\S+\.\S+$/;
+            if (!emailFormat.test(document.getElementById("email").value)) {
+                errorMessage += "Invalid email address. ";
+            }
+
+            // Display error message if any
+            if (errorMessage !== "") {
+                document.getElementById("error-message").innerHTML = errorMessage;
+                return false;
+            } else {
+                // Clear error message if validation passes
+                document.getElementById("error-message").innerHTML = "";
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>
