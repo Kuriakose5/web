@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Exam</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color:powderblue;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+    }
+
+    #quiz-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .question {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .question p {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .question-container {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Java Script Quiz </h1>
+</header>
+
+<div id="quiz-container">
+  <div class="question-container">
+    <h3>Qn 1: How can a datatype be declared to be a constant type?</h3>
+        <label><input type="radio" name="q1" value="var"> var<br></label>
+        <label><input type="radio" name="q1" value="const">const<br></label>
+        <label><input type="radio" name="q1" value="let"> let<br></label>
+      </div>
+
+<div class="question-container">
+        <h3>Qn 2: What is the use of the <non-script> tag in Javascript?</h3>
+        <label><input type="radio" name="q2" value="The Contents are displayed by non-JS based browsers"> The Contents are displayed by non-JS based browsers<br></label> 
+        <label><input type="radio" name="q2" value="Clears all the cookies and cache"> Clears all the cookies and cache<br></label>
+        <label><input type="radio" name="q2" value="None of the above"> None of the above<br></label>
+      </div>
+
+<div class="question-container">
+        <h3>Qn 3: In JavaScript, what is a block of statement?</h3>
+        <label><input type="radio" name="q3" value="Conditional block"> Conditional block<br></label> 
+        <label><input type="radio" name="q3" value="Block that combines a number of statements into a single compound statement"> Block that combines a number of statements into a single compound statement<br></label>
+        <label><input type="radio" name="q3" value="Block that contains a single statement"> Block that contains a single statement<br></label>
+      </div>
+
+       <div class="question-container">
+        <h3>Qn 4: When interpreter encounters an empty statements, what it will do:</h3>
+        <label><input type="radio" name="q4" value="Shows a warning "> Shows a warning<br></label> 
+        <label><input type="radio" name="q4" value="Prompts to complete the statement"> Prompts to complete the statement<br></label>
+        <label><input type="radio" name="q4" value="Ignores the statements"> Ignores the statements<br></label>
+      </div>
+
+<div class="question-container">
+        <h3>Qn 5: The "function" and " var" are known as:</h3>
+        <label><input type="radio" name="q5" value="Keywords"> Keywords<br></label> 
+        <label><input type="radio" name="q5" value="Declaration statements"> Declaration statements<br></label>
+        <label><input type="radio" name="q5" value="Data types"> Data types<br></label>
+      </div>
+
+  <br>
+      <br>
+      <center>
+        <input type="button" value="Submit" onclick="submitExam()">
+      </center>
+    </form>
+<div id="result">
+      <center>
+        <h2>Result:</h2>
+        <p id="score"></p>
+        <h3>Correct Answers:</h3>
+        <ul id="correctAnswers"></ul>
+      </center>
+    </div>
+<script>
+    function submitExam() {
+      const correctAnswers = {
+        q1: 'const',
+        q2:'The Contents are displayed by non-JS based browsers',
+        q3:'Block that combines a number of statements into a single compound statement',
+        q4:'Ignores the statements',
+        q5:'Declaration statements',
+ };
+ const userAnswers = {
+        q1: document.querySelector('input[name="q1"]:checked').value,
+        q2: document.querySelector('input[name="q2"]:checked').value,
+        q3: document.querySelector('input[name="q3"]:checked').value,
+        q4: document.querySelector('input[name="q4"]:checked').value,
+        q5: document.querySelector('input[name="q5"]:checked').value,
+ };
+
+      let score = 0;
+      for (const question in correctAnswers) {
+        if (correctAnswers[question] === userAnswers[question]) {
+          score++;
+        }
+      }
+
+      document.getElementById('score').innerText = `OBTAINED SCORE: ${score} out of 5`;
+      const correctAnswersList = document.getElementById('correctAnswers');
+      correctAnswersList.innerHTML = '';
+
+      for (const question in correctAnswers) {
+        const li = document.createElement('li');
+        const userAns = userAnswers[question];
+        const correctAns = correctAnswers[question];
+
+        li.innerHTML = `<strong>Question ${question.slice(1)}:</strong><br> Your Answer: ${userAns}<br> Correct Answer: ${correctAns}`;
+        correctAnswersList.appendChild(li);
+      }
+
+      document.getElementById('result').style.display = 'block';
+      alert("your score is: " + score);
+    }
+  
+</script>
+
+</body>
+</html>

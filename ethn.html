@@ -1,0 +1,36 @@
+<html>
+<head>
+<style>
+.myDiv {
+  border:6px ;
+  background-color:yellow;    
+}
+</style>
+</head>
+<body style="background-color:powderblue;">
+<div class="myDiv">
+<h1 style="color:green; text-align:center";>Event Handling</h1>
+</div>
+<p style="color:white">A Java Script program with event handling function addEventListener()</p>
+<button id="btn">Click</button>
+<p id="ev"></p>
+<script>
+var x = document.getElementById("btn");
+x.addEventListener("mouseover", mouseOverFunction);
+x.addEventListener("click", mouseClickFunction);
+x.addEventListener("mouseout", mouseOutFunction);
+function mouseOverFunction() 
+{
+document.getElementById("ev").innerHTML += "Hovering!<br>";
+}
+function mouseClickFunction()
+{
+document.getElementById("ev").innerHTML += "Clicked!<br>";
+}
+function mouseOutFunction()
+ {
+document.getElementById("ev").innerHTML += "Moused out!<br>";
+}
+</script>
+</body>
+</html
